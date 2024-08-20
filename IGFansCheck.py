@@ -15,21 +15,22 @@ followers = []
 
 for i in profile.get_followees():
     followings.append(i.username)
-    
+
+# 這裡直接空撈，還不報錯
+print(f"followers:\n{profile.get_followers()}")
 for i in profile.get_followers():
     followers.append(i.username)
 
 followings_set = set(followings)
 followers_set = set(followers)
-
-print(f"current followings: {profile.followees}")
-print(f"current followers: {profile.followers}")
+print(f"追蹤數： {len(followings_set)}")
+print(f"粉絲數： {len(followers_set)}")
 
 # 求出兩名單之間的差異帳號
 delta_set = followings_set - followers_set
 
 # 讀取例外帳號名單
-otherFile = open("OtherList.txt", 'r')
+otherFile = open("IGOtherList.txt", 'r')
 other = otherFile.readlines()
 
 for i in range(len(other)):
@@ -49,7 +50,7 @@ for i in delta_set:
     
 delta_sortList.sort()
 
-file = open("NoSubList.txt", 'w')
+file = open("IGNoSubList.txt", 'w')
 
 for i in delta_sortList:
     file.write(f"{i}\n")
